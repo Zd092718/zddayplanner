@@ -8,14 +8,14 @@ var timeEl = moment().hour()
 $('#currentDay').html(moment().format("MMM DD YYYY"));
 
 saveEl.on('click', function(){
-    let textarea = $(this).siblings().eq(1).attr('id')
+    let textareaID = $(this).siblings().eq(1).attr('id');
+    localStorage.setItem(textareaID, $('#' + textareaID).val());
 })
 
 $('textarea').each(function () {
-    var rowHour = parseInt($(this).attr('id').split('-')[1])
-    console.log(rowHour)
-    var sameId = $(this).attr('id');
-    var task = localStorage.getItem(sameId);
+    var rowHour = parseInt($(this).attr('id').split('-')[1]);
+    var idVal = $(this).attr('id');
+    $(this).val(localStorage.getItem(idVal))
     if(timeEl > rowHour){
         console.log("hit")
         $(this).addClass('past')
@@ -25,6 +25,5 @@ $('textarea').each(function () {
         $(this).addClass('future')
     }
 })
-
 
 
